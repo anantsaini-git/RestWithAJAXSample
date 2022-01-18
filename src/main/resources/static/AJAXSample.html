@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function getResourceData() {
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "http://localhost:8080/getResource", true);
+            xhttp.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    var response = this.responseText;
+
+                    console.log( response);
+                    document.getElementById("ajaxdata").innerHTML = response;
+
+                }
+            };
+            xhttp.send();
+        }
+
+        function getResourceJSONData() {
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "http://localhost:8080/getJSONResource", true);
+            xhttp.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    var responseJsonObj = JSON.parse(this.responseText);
+
+                    document.getElementById("ajaxJSONdata").innerHTML = "ID: " + responseJsonObj.id
+                    + "DATA: " + responseJsonObj.data;
+                }
+            };
+            xhttp.send();
+        }
+    </script>
+        </head>
+<body>
+
+<p id = "ajaxdata">Data</p>
+<p id = "ajaxJSONdata">Data</p>
+
+<button onclick="getResourceData()">Get Data</button>
+<button onclick="getResourceJSONData()">Get Data</button>
+
+</body>
+</html>
